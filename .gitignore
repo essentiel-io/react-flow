@@ -4,7 +4,7 @@ node_modules
 examples/build
 cypress/videos
 cypress/screenshots
-dist
+#dist
 .env
 stats.html
 .eslintcache

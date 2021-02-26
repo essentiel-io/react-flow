@@ -3,7 +3,7 @@
   "version": "8.8.0",
   "main": "dist/ReactFlow.js",
   "module": "dist/ReactFlow.esm.js",
-  "cdn": "cdn/react-flow-renderer.min.js",
+  "cdn": "dist/ReactFlow.min.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
   "repository": {
