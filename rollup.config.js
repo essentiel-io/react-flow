@@ -6,6 +6,7 @@ import bundleSize from 'rollup-plugin-bundle-size';
 import replace from '@rollup/plugin-replace';
 import svgr from '@svgr/rollup';
 import typescript from 'rollup-plugin-typescript2';
+import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
 
@@ -13,7 +14,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const isTesting = process.env.NODE_ENV === 'testing';
 const processEnv = isProd || isTesting ? 'production' : 'development';
 
-export const baseConfig = ({ mainFile = pkg.main, moduleFile = pkg.module, injectCSS = true } = {}) => ({
+export const baseConfig = ({ mainFile = pkg.main, moduleFile = pkg.module, cdnFile = pkg.cdn, injectCSS = true } = {}) => ({
   input: 'src/index.ts',
   external: ['react', 'react-dom', /@babel\/runtime/],
   onwarn(warning, rollupWarn) {
@@ -34,6 +35,12 @@ export const baseConfig = ({ mainFile = pkg.main, moduleFile = pkg.module, injec
       sourcemap: true,
       exports: 'named',
     },
+    {
+      file: cdnFile,
+      format: 'iife',
+      name: 'ReactFlow',
+      plugins: [terser()]
+    }
   ],
   plugins: [
     replace({
