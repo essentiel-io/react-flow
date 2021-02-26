@@ -37,9 +37,18 @@ export const baseConfig = ({ mainFile = pkg.main, moduleFile = pkg.module, cdnFi
     },
     {
       file: cdnFile,
-      format: 'iife',
+      format: 'umd',
       name: 'ReactFlow',
-      plugins: [terser()]
+      sourcemap: true,
+      exports: 'named',
+      plugins: [
+        terser(),
+      ],
+      globals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+        '@babel/runtime/helpers/objectSpread2': '_objectSpread$1',
+      },
     }
   ],
   plugins: [
